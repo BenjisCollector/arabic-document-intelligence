@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gulf Document Intelligence</title>
+<style>
+:root{--bg:#f6f8f7;--card:#fff;--ink:#16211f;--mute:#5d6b68;--line:#dbe4e1;--accent:#0b6b5d;--accent-ink:#fff;--ok:#1a7f4b;--warn:#b26a00;--bad:#b42318;--okbg:#e4f5ec;--warnbg:#fff3dc;--badbg:#fde8e6}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 system-ui,-apple-system,"Segoe UI","Noto Sans Arabic","Geeza Pro",sans-serif}
+header{display:flex;align-items:center;gap:16px;padding:10px 20px;background:var(--card);border-bottom:1px solid var(--line)}
+header h1{font-size:17px;margin:0}header p{margin:0;color:var(--mute);font-size:12px}
+.chips{margin-inline-start:auto;display:flex;gap:6px;align-items:center;white-space:nowrap}
+.chip{border:1px solid var(--line);border-radius:999px;padding:2px 10px;font-size:12px;color:var(--mute);background:var(--bg)}
+.chip b{color:var(--ink);font-weight:600}
+.export{margin-inline-start:6px}.export a{font-size:12px;color:var(--accent);text-decoration:none;border:1px solid var(--accent);border-radius:6px;padding:3px 8px;margin-inline-start:4px}
+main{display:grid;grid-template-columns:360px 1fr;gap:14px;padding:14px 20px;height:calc(var(--vh,100vh) - 56px)}
+aside,section{background:var(--card);border:1px solid var(--line);border-radius:10px;min-height:0;display:flex;flex-direction:column}
+aside{padding:12px}
+.drop{border:2px dashed var(--line);border-radius:8px;padding:10px;text-align:center;color:var(--mute);font-size:13px;transition:.15s}
+.drop.over{border-color:var(--accent);background:var(--okbg)}
+.drop label{color:var(--accent);cursor:pointer;text-decoration:underline}
+.btns{display:flex;gap:8px;margin:10px 0}
+button{font:inherit;border-radius:7px;border:1px solid var(--line);background:var(--card);padding:6px 12px;cursor:pointer;color:var(--ink)}
+button.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:600}
+button:disabled{opacity:.45;cursor:default}
+.tabs{display:flex;border-bottom:1px solid var(--line);margin-bottom:6px}
+.tabs button{border:0;border-bottom:2px solid transparent;border-radius:0;background:none;padding:6px 10px;color:var(--mute)}
+.tabs button.on{color:var(--accent);border-color:var(--accent);font-weight:600}
+.tabs span{background:var(--warnbg);color:var(--warn);border-radius:9px;padding:0 6px;font-size:11px;margin-inline-start:4px}
+ul{list-style:none;margin:0;padding:0;overflow:auto;flex:1}
+li{padding:8px;border-radius:8px;cursor:pointer;display:grid;grid-template-columns:1fr auto;gap:2px 8px;border:1px solid transparent}
+li:hover{background:var(--bg)}li.sel{background:var(--okbg);border-color:#bfe3d0}
+li .fn{font-weight:600;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+li .meta{color:var(--mute);font-size:12px;grid-column:1/3}
+.pill{font-size:11px;border-radius:999px;padding:1px 8px;white-space:nowrap;align-self:start}
+.pill.needs_review{background:var(--warnbg);color:var(--warn)}.pill.auto_approved,.pill.approved{background:var(--okbg);color:var(--ok)}
+.pill.processing{background:#e8eefc;color:#2851b8}.pill.failed{background:var(--badbg);color:var(--bad)}
+section{padding:14px 16px;overflow-y:auto;overflow-x:hidden}
+.empty{margin:auto;color:var(--mute);text-align:center}
+.dhead{display:flex;align-items:center;gap:10px}.dhead h2{margin:0;font-size:16px}
+.reasons{background:var(--warnbg);color:#6b4200;border-radius:8px;padding:6px 12px;margin:8px 0;font-size:13px}
+.cols{display:grid;grid-template-columns:minmax(0,38%) minmax(0,1fr);gap:16px;flex:1;min-height:0}
+.prev{border:1px solid var(--line);border-radius:8px;overflow:auto;background:#fafafa;max-height:62vh}.prev img{width:100%;display:block}
+table{width:100%;border-collapse:collapse;table-layout:fixed}
+td{padding:3px 6px;vertical-align:top;border-bottom:1px solid var(--bg);overflow:hidden}
+td.lab{color:var(--mute);font-size:12px;width:24%;padding-top:9px}
+input.v{width:100%;font:inherit;padding:4px 8px;border:1px solid var(--line);border-radius:6px;background:var(--card)}
+input.v:focus{outline:2px solid #9ad1c4;border-color:var(--accent)}
+.sub{font-size:11px;color:var(--mute);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.sub.bad{color:var(--bad);white-space:normal}
+.conf{width:84px;padding-top:9px}.bar{height:6px;border-radius:3px;background:var(--line);overflow:hidden}.bar i{display:block;height:100%}
+.conf small{font-size:11px;font-variant-numeric:tabular-nums}
+.hi i{background:var(--ok)}.mid i{background:#d99a00}.lo i{background:var(--bad)}
+.hi small{color:var(--ok)}.mid small{color:var(--warn)}.lo small{color:var(--bad)}
+.actions{display:flex;align-items:center;gap:10px;margin-top:8px;padding:10px 0 2px;border-top:1px solid var(--line);position:sticky;bottom:-14px;background:var(--card)}
+.actions input{padding:6px 8px;border:1px solid var(--line);border-radius:6px;font:inherit;width:150px}
+.msg{font-size:12px;color:var(--bad)}.msg.ok{color:var(--ok)}
+.at td{font-size:12px}.at td:first-child{color:var(--mute);white-space:nowrap}
+</style>
+</head>
+<body>
+<header>
+  <div><h1>Gulf Document Intelligence</h1><p>Arabic and English documents to validated data, with a review queue.</p></div>
+  <div class="chips"><span class="chip">OCR <b id="c-ocr">...</b></span><span class="chip">Extractor <b id="c-llm" title="">...</b></span><span class="chip">Review below <b id="c-th">...</b></span>
+    <span class="export">Export: <a href="/api/export?format=xlsx">Excel</a><a href="/api/export?format=csv">CSV</a><a href="/api/export?format=json">JSON</a></span></div>
+</header>
+<main>
+  <aside>
+    <div class="drop" id="drop">Drop a document here (PDF, PNG, JPG)<br>or <label>browse<input type="file" id="file" accept=".pdf,.png,.jpg,.jpeg,.txt" hidden></label></div>
+    <div class="btns"><button class="primary" id="samples">Load 14 sample documents</button><button id="clear">Clear</button></div>
+    <div class="tabs" id="tabs"><button data-t="queue" class="on">Review queue<span id="nq">0</span></button><button data-t="all">All</button><button data-t="audit">Audit trail</button></div>
+    <ul id="list"></ul>
+  </aside>
+  <section id="detail"><div class="empty">Select a document, or drop one in.<br>Anything the system is unsure about lands in the review queue.</div></section>
+</main>
+<script>
+// ?stage=1280x800 pins the layout to a fixed viewport (used to record the README demo at a standard size)
+const st=new URLSearchParams(location.search).get('stage');if(st){const[w,h]=st.split('x');document.documentElement.style.cssText=`width:${w}px;height:${h}px;overflow:hidden;--vh:${h}px`;document.body.style.overflow='hidden'}
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const TYPE={invoice:"Invoice",employment_contract:"Contract",leave_request:"HR form"};
+let docs=[],tab="queue",sel=null,cfg=null;
+const api=async(u,o)=>{const r=await fetch(u,o);if(!r.ok){let m=r.statusText;try{m=(await r.json()).detail||m}catch{}throw new Error(m)}return r.json()};
+const minConf=d=>{const v=Object.values(d.fields||{}).filter(f=>f.value!=null).map(f=>f.confidence);return v.length?Math.min(...v):null};
+const cls=c=>c>=.9?"hi":c>=.8?"mid":"lo";
+const label=s=>s.replaceAll("_"," ");
+
+async function refresh(){
+  docs=await api("/api/documents");
+  const q=docs.filter(d=>d.status==="needs_review").length;$("#nq").textContent=q;
+  renderList();
+  if(docs.some(d=>d.status==="processing"))setTimeout(refresh,1200);
+  else if(sel&&tab!=="audit"&&!document.activeElement.matches?.("input.v"))open(sel,true);
+}
+function renderList(){
+  document.querySelectorAll("#tabs button").forEach(b=>b.classList.toggle("on",b.dataset.t===tab));
+  const shown=tab==="queue"?docs.filter(d=>d.status==="needs_review"):tab==="all"?docs:[];
+  $("#list").innerHTML=tab==="audit"?"":(shown.map(d=>{const m=minConf(d);
+    return `<li data-id="${d.id}" class="${d.id===sel?"sel":""}"><span class="fn" dir="auto">${esc(d.filename)}</span><span class="pill ${d.status}">${esc(label(d.status))}</span>
+    <span class="meta">${esc(TYPE[d.document_type]||"")} ${m!=null?" | lowest field confidence "+Math.round(m*100)+"%":""}</span></li>`}).join("")||`<li style="cursor:default"><span class="meta">${tab==="queue"?"Nothing waiting for review.":"No documents yet."}</span></li>`);
+}
+async function open(id,keep){
+  sel=id;const d=await api("/api/documents/"+id);renderList();
+  if(d.status==="processing"){$("#detail").innerHTML='<div class="empty">Reading the document...</div>';return}
+  const rows=Object.entries(d.fields).map(([k,f])=>`<tr><td class="lab">${esc(label(k))}</td>
+    <td><input class="v" dir="auto" data-f="${k}" value="${esc(f.value??"")}" placeholder="${f.value==null?"not found, type it in":""}" ${d.status==="approved"?"disabled":""}>
+    ${f.issues.length?`<div class="sub bad">${esc(f.issues.join("; "))}</div>`:`<div class="sub" dir="auto" title="${esc(f.evidence)}">${f.source==="human"?"corrected by a reviewer":(f.evidence?esc(f.evidence):"")}${f.note?" | "+esc(f.note):""}</div>`}</td>
+    <td class="conf ${cls(f.confidence)}"><div class="bar"><i style="width:${Math.round(f.confidence*100)}%"></i></div><small>${f.value==null?"empty":Math.round(f.confidence*100)+"%"}</small></td></tr>`).join("");
+  const audit=d.audit.map(e=>`<tr><td>${esc(e.ts.slice(11,19))}</td><td>${esc(e.actor)}</td><td>${esc(e.action)}${e.field?" "+esc(e.field):""}${e.old!=null||e.new!=null?`: ${esc(e.old)} to ${esc(e.new)}`:""}<br><span style="color:var(--mute)">${esc(e.note)}</span></td></tr>`).join("");
+  const keepName=$("#rev")?.value||localStorage.getItem("reviewer")||"Sara (finance)";
+  $("#detail").innerHTML=`<div class="dhead"><h2 dir="auto">${esc(d.filename)}</h2><span class="pill ${d.status}">${esc(label(d.status))}</span><span class="chip">${esc(TYPE[d.document_type]||"unknown")}</span><span class="chip">${esc(d.engine||"")}</span></div>
+  ${d.review_reasons.length&&d.status==="needs_review"?`<div class="reasons"><b>Why it is in the queue:</b> ${esc(d.review_reasons.join(" | "))}</div>`:""}
+  <div class="cols"><div class="prev"><img src="/api/documents/${id}/preview" alt="document preview"></div>
+  <div><table>${rows}</table>
+  <div class="actions"><input id="rev" value="${esc(keepName)}" aria-label="Reviewer name"><button class="primary" id="approve" ${d.status==="approved"||d.status==="auto_approved"?"disabled":""}>${d.status==="approved"?"Approved":d.status==="auto_approved"?"Auto-approved":"Approve"}</button><span class="msg" id="msg"></span></div>
+  <details style="margin-top:10px"><summary style="cursor:pointer;color:var(--mute)">Audit trail for this document (${d.audit.length})</summary><table class="at">${audit}</table></details></div></div>`;
+  document.querySelectorAll("input.v").forEach(i=>i.addEventListener("change",async()=>{
+    try{await api(`/api/documents/${id}/fields/${i.dataset.f}`,{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({value:i.value,reviewer:$("#rev").value})});await refresh();await open(id)}
+    catch(e){$("#msg").className="msg";$("#msg").textContent=e.message}}));
+  $("#approve").onclick=async()=>{localStorage.setItem("reviewer",$("#rev").value);
+    try{await api(`/api/documents/${id}/approve`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({reviewer:$("#rev").value})});await refresh();await open(id)}
+    catch(e){$("#msg").className="msg";$("#msg").textContent=e.message}};
+}
+async function showAudit(){
+  const a=await api("/api/audit");
+  $("#detail").innerHTML=`<div class="dhead"><h2>Audit trail</h2><span class="chip">newest first, every extraction, correction and approval</span></div><table class="at" style="margin-top:10px">${a.map(e=>`<tr><td>${esc(e.ts.replace("T"," ").slice(0,19))}</td><td dir="auto">${esc(e.filename||"")}</td><td>${esc(e.actor)}</td><td>${esc(e.action)}${e.field?" "+esc(e.field):""}${e.old!=null||e.new!=null?`: ${esc(e.old)} to ${esc(e.new)}`:""} <span style="color:var(--mute)">${esc(e.note)}</span></td></tr>`).join("")}</table>`;
+}
+async function upload(file){
+  const fd=new FormData();fd.append("file",file);
+  const r=await api("/api/documents",{method:"POST",body:fd});tab="all";await refresh();open(r.id);return r.id;
+}
+// used by the drop zone, the file picker and the scripted demo
+window.dropSample=async name=>{const b=await (await fetch("/samples/"+name)).blob();return upload(new File([b],name,{type:b.type}))};
+$("#file").onchange=e=>e.target.files[0]&&upload(e.target.files[0]);
+const dz=$("#drop");
+["dragenter","dragover"].forEach(t=>dz.addEventListener(t,e=>{e.preventDefault();dz.classList.add("over")}));
+["dragleave","drop"].forEach(t=>dz.addEventListener(t,e=>{e.preventDefault();dz.classList.remove("over")}));
+dz.addEventListener("drop",e=>e.dataTransfer.files[0]&&upload(e.dataTransfer.files[0]));
+$("#samples").onclick=async()=>{await api("/api/samples/load",{method:"POST"});tab="queue";await refresh()};
+$("#clear").onclick=async()=>{if(confirm("Delete all documents and the audit trail?")){await api("/api/reset",{method:"POST"});sel=null;$("#detail").innerHTML='<div class="empty">Cleared.</div>';await refresh()}};
+$("#tabs").onclick=e=>{const t=e.target.closest("button")?.dataset.t;if(!t)return;tab=t;renderList();if(t==="audit")showAudit()};
+$("#list").onclick=e=>{const li=e.target.closest("li[data-id]");if(li)open(+li.dataset.id)};
+(async()=>{cfg=await api("/api/config");$("#c-ocr").textContent=cfg.ocr;$("#c-llm").textContent=cfg.llm;$("#c-th").textContent=Math.round(cfg.threshold*100)+"%";await refresh()})();
+</script>
+</body>
+</html>

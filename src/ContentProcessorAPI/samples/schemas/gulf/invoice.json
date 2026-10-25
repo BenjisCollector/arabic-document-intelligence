@@ -1,0 +1,125 @@
+{
+  "description": "Arabic/English tax invoice (KWD, QAR, SAR, AED)",
+  "properties": {
+    "supplier_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Supplier legal name",
+      "title": "Supplier Name"
+    },
+    "supplier_vat_number": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Supplier VAT / tax registration number",
+      "title": "Supplier Vat Number"
+    },
+    "invoice_number": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Invoice number",
+      "title": "Invoice Number"
+    },
+    "invoice_date": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Invoice date, Gregorian or Hijri, normalised to Gregorian ISO",
+      "title": "Invoice Date"
+    },
+    "subtotal": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Amount before VAT",
+      "title": "Subtotal"
+    },
+    "vat_rate": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "VAT rate in percent",
+      "title": "Vat Rate"
+    },
+    "vat_amount": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "VAT amount",
+      "title": "Vat Amount"
+    },
+    "total": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Invoice total including VAT",
+      "title": "Total"
+    },
+    "currency": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "KWD, QAR, SAR or AED (derived from the total's currency marker)",
+      "title": "Currency"
+    }
+  },
+  "required": [
+    "supplier_name",
+    "invoice_number",
+    "invoice_date",
+    "subtotal",
+    "vat_rate",
+    "vat_amount",
+    "total",
+    "currency"
+  ],
+  "title": "InvoiceDocument",
+  "type": "object"
+}
