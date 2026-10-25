@@ -1,0 +1,15 @@
+digraph G {
+ bgcolor="white"; pad=0.3; splines=true; outputorder=edgesfirst;
+ node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=15, fontcolor="#1B2D52", penwidth=1.4, margin="0.2,0.14", fixedsize=false];
+ edge [color="#1B2D52", fontname="Helvetica", fontsize=14, fontcolor="#1B2D52", penwidth=1.5, arrowsize=1.0];
+ doc [label="Documents\nPDF, scan, image\nArabic or English", fillcolor="#FFF4E0", color="#E0A030", pos="0,317!"];
+ read [label="1  Read\nLocal: Tesseract ara+eng\nor clean PDF text layer\nAzure: Document Intelligence", fillcolor="#E6F4FB", color="#159BD7", pos="274,317!"];
+ classify [label="2  Classify\ninvoice, employment\ncontract, HR form", fillcolor="#EEF2F8", color="#1B2D52", pos="547,317!"];
+ extract [label="3  Extract\nLocal: rules extractor\nOptional: OpenAI or\nAzure OpenAI LLM", fillcolor="#E6F4FB", color="#159BD7", pos="821,317!"];
+ norm [label="4  Normalise and validate\nArabic-Indic digits, Hijri dates\nKWD QAR SAR AED, VAT,\ntotals add up", fillcolor="#EEF2F8", color="#1B2D52", pos="821,158!"];
+ route [label="5  Per-field confidence\nand routing", fillcolor="#EEF2F8", color="#1B2D52", pos="547,158!"];
+ auto [label="Yes: auto-approved\nevery field 80% or more\nand all rules pass", fillcolor="#E8F5EC", color="#2E8B57", pos="245,216!"];
+ queue [label="No: review queue\nApprove or correct", fillcolor="#FFF4E0", color="#E0A030", pos="245,65!"];
+ store [label="SQLite store, audit trail\nExport JSON, CSV, Excel", fillcolor="#EEF2F8", color="#1B2D52", pos="0,140!"];
+ doc->read; read->classify; classify->extract; extract->norm; norm->route; route->auto; route->queue; auto->store; queue->store;
+}

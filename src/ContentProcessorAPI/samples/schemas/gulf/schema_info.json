@@ -1,0 +1,23 @@
+{
+    "schemas": [
+        {
+            "File": "invoice.json",
+            "ClassName": "InvoiceDocument",
+            "Description": "Arabic/English tax invoice (KWD, QAR, SAR, AED)"
+        },
+        {
+            "File": "employment_contract.json",
+            "ClassName": "EmploymentContractDocument",
+            "Description": "Employment contract (parties, salary, start date, notice period)"
+        },
+        {
+            "File": "leave_request.json",
+            "ClassName": "LeaveRequestDocument",
+            "Description": "HR leave request form"
+        }
+    ],
+    "schemaset": {
+        "Name": "Gulf documents",
+        "Description": "Arabic-first invoice, employment contract and HR leave request schemas (KWD, QAR, SAR, AED)"
+    }
+}

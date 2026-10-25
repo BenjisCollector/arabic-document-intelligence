@@ -1,0 +1,87 @@
+{
+  "description": "HR leave request form",
+  "properties": {
+    "employee_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Employee name",
+      "title": "Employee Name"
+    },
+    "employee_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Employee ID",
+      "title": "Employee Id"
+    },
+    "leave_type": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "annual | sick | unpaid | emergency",
+      "title": "Leave Type"
+    },
+    "start_date": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "First day of leave",
+      "title": "Start Date"
+    },
+    "end_date": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Last day of leave",
+      "title": "End Date"
+    },
+    "days_requested": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Calendar days requested (inclusive)",
+      "title": "Days Requested"
+    }
+  },
+  "required": [
+    "employee_name",
+    "employee_id",
+    "leave_type",
+    "start_date",
+    "end_date",
+    "days_requested"
+  ],
+  "title": "LeaveRequestDocument",
+  "type": "object"
+}

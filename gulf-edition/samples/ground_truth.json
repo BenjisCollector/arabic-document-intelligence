@@ -1,0 +1,224 @@
+{
+  "inv-01-kwd-ar": {
+    "document_type": "invoice",
+    "language": "ar",
+    "expected_to_need_review": false,
+    "note": "",
+    "fields": {
+      "supplier_name": "شركة النخلة الزرقاء التجريبية للتجارة",
+      "supplier_vat_number": "300000000000003",
+      "invoice_number": "KW-2026-0142",
+      "invoice_date": "2026-03-15",
+      "subtotal": "1250.000",
+      "vat_rate": "0",
+      "vat_amount": "0.000",
+      "total": "1250.000",
+      "currency": "KWD"
+    }
+  },
+  "inv-02-sar-ar-hijri": {
+    "document_type": "invoice",
+    "language": "ar",
+    "expected_to_need_review": false,
+    "note": "Hijri date, converted to Gregorian",
+    "fields": {
+      "supplier_name": "مؤسسة الكثيب الذهبي التجريبية للتجارة",
+      "supplier_vat_number": "310000000000003",
+      "invoice_number": "INV-7781",
+      "invoice_date": "2026-01-01",
+      "subtotal": "8400.00",
+      "vat_rate": "15",
+      "vat_amount": "1260.00",
+      "total": "9660.00",
+      "currency": "SAR"
+    }
+  },
+  "inv-03-aed-en-indic": {
+    "document_type": "invoice",
+    "language": "en",
+    "expected_to_need_review": false,
+    "note": "Arabic-Indic numerals, clean text layer",
+    "fields": {
+      "supplier_name": "Gulf Dunes Logistics LLC (sample)",
+      "supplier_vat_number": "100000000000003",
+      "invoice_number": "GDL-2026-0457",
+      "invoice_date": "2026-04-02",
+      "subtotal": "3000.00",
+      "vat_rate": "5",
+      "vat_amount": "150.00",
+      "total": "3150.00",
+      "currency": "AED"
+    }
+  },
+  "inv-04-qar-ar-month": {
+    "document_type": "invoice",
+    "language": "ar",
+    "expected_to_need_review": false,
+    "note": "Arabic month name",
+    "fields": {
+      "supplier_name": "شركة اللؤلؤة الرقمية التجريبية",
+      "supplier_vat_number": "QA-000000",
+      "invoice_number": "QA-3310",
+      "invoice_date": "2026-05-05",
+      "subtotal": "22000.00",
+      "vat_rate": "0",
+      "vat_amount": "0.00",
+      "total": "22000.00",
+      "currency": "QAR"
+    }
+  },
+  "inv-05-kwd-en-arabic-separators": {
+    "document_type": "invoice",
+    "language": "en",
+    "expected_to_need_review": false,
+    "note": "Arabic decimal and thousands separators",
+    "fields": {
+      "supplier_name": "Sample Harbour Trading",
+      "supplier_vat_number": "300000000000004",
+      "invoice_number": "KW-90210",
+      "invoice_date": "2026-06-20",
+      "subtotal": "4850.500",
+      "vat_rate": "0",
+      "vat_amount": "0.000",
+      "total": "4850.500",
+      "currency": "KWD"
+    }
+  },
+  "inv-06-sar-ar-bad-total": {
+    "document_type": "invoice",
+    "language": "ar",
+    "expected_to_need_review": true,
+    "note": "Deliberate error: total does not add up",
+    "fields": {
+      "supplier_name": "شركة الواحة الخيالية للتقنية",
+      "supplier_vat_number": "320000000000003",
+      "invoice_number": "INV-9004",
+      "invoice_date": "2026-07-09",
+      "subtotal": "5000.00",
+      "vat_rate": "15",
+      "vat_amount": "750.00",
+      "total": "5570.00",
+      "currency": "SAR"
+    }
+  },
+  "inv-07-sar-ar-scan": {
+    "document_type": "invoice",
+    "language": "ar",
+    "expected_to_need_review": false,
+    "note": "Scanned image, OCR path",
+    "fields": {
+      "supplier_name": "مؤسسة السراب الأزرق التجريبية",
+      "supplier_vat_number": "330000000000003",
+      "invoice_number": "SC-1203",
+      "invoice_date": "2026-08-02",
+      "subtotal": "12000.00",
+      "vat_rate": "15",
+      "vat_amount": "1800.00",
+      "total": "13800.00",
+      "currency": "SAR"
+    }
+  },
+  "ct-01-sar-ar-hijri": {
+    "document_type": "employment_contract",
+    "language": "ar",
+    "expected_to_need_review": false,
+    "note": "Hijri start date",
+    "fields": {
+      "employer_name": "شركة الكثيب الذهبي التجريبية",
+      "employee_name": "سالم عبدالله التجريبي",
+      "job_title": "مهندس برمجيات",
+      "salary_monthly": "18000.00",
+      "currency": "SAR",
+      "start_date": "2026-01-20",
+      "notice_period_days": 60
+    }
+  },
+  "ct-02-aed-en-indic": {
+    "document_type": "employment_contract",
+    "language": "en",
+    "expected_to_need_review": false,
+    "note": "Arabic-Indic numerals, clean text layer",
+    "fields": {
+      "employer_name": "Blue Palm Trading Co. (sample)",
+      "employee_name": "Layla Sample-Hassan",
+      "job_title": "Finance Manager",
+      "salary_monthly": "25000.00",
+      "currency": "AED",
+      "start_date": "2026-06-01",
+      "notice_period_days": 30
+    }
+  },
+  "ct-03-kwd-ar": {
+    "document_type": "employment_contract",
+    "language": "ar",
+    "expected_to_need_review": false,
+    "note": "",
+    "fields": {
+      "employer_name": "شركة اللؤلؤة الرقمية التجريبية",
+      "employee_name": "فاطمة الوهمي",
+      "job_title": "محللة بيانات",
+      "salary_monthly": "1200.000",
+      "currency": "KWD",
+      "start_date": "2026-07-01",
+      "notice_period_days": 30
+    }
+  },
+  "ct-04-qar-ar-scan": {
+    "document_type": "employment_contract",
+    "language": "ar",
+    "expected_to_need_review": false,
+    "note": "Scanned image, OCR path",
+    "fields": {
+      "employer_name": "مؤسسة الواحة الخيالية",
+      "employee_name": "ناصر التجريبي",
+      "job_title": "محاسب",
+      "salary_monthly": "15000.00",
+      "currency": "QAR",
+      "start_date": "2026-09-10",
+      "notice_period_days": 45
+    }
+  },
+  "ct-05-sar-ar-no-notice": {
+    "document_type": "employment_contract",
+    "language": "ar",
+    "expected_to_need_review": true,
+    "note": "Deliberate gap: no notice period in the document",
+    "fields": {
+      "employer_name": "شركة الرمال الوهمية",
+      "employee_name": "هند الخيالي",
+      "job_title": "مسؤولة موارد بشرية",
+      "salary_monthly": "14000.00",
+      "currency": "SAR",
+      "start_date": "2026-10-01",
+      "notice_period_days": null
+    }
+  },
+  "hr-01-leave-ar": {
+    "document_type": "leave_request",
+    "language": "ar",
+    "expected_to_need_review": false,
+    "note": "",
+    "fields": {
+      "employee_name": "أحمد الوهمي",
+      "employee_id": "EMP-4021",
+      "leave_type": "annual",
+      "start_date": "2026-04-12",
+      "end_date": "2026-04-16",
+      "days_requested": 5
+    }
+  },
+  "hr-02-leave-en-bad-dates-scan": {
+    "document_type": "leave_request",
+    "language": "en",
+    "expected_to_need_review": true,
+    "note": "Deliberate error: end date before start date; scanned",
+    "fields": {
+      "employee_name": "Mona Example",
+      "employee_id": "EMP-5532",
+      "leave_type": "sick",
+      "start_date": "2026-05-20",
+      "end_date": "2026-05-18",
+      "days_requested": 3
+    }
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "description": "Employment contract (parties, salary, start date, notice period)",
+  "properties": {
+    "employer_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Employer (first party)",
+      "title": "Employer Name"
+    },
+    "employee_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Employee (second party)",
+      "title": "Employee Name"
+    },
+    "job_title": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Job title",
+      "title": "Job Title"
+    },
+    "salary_monthly": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Monthly salary with currency",
+      "title": "Salary Monthly"
+    },
+    "start_date": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Start date, Gregorian or Hijri, normalised to Gregorian ISO",
+      "title": "Start Date"
+    },
+    "notice_period_days": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Notice period in days",
+      "title": "Notice Period Days"
+    },
+    "currency": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "KWD, QAR, SAR or AED (derived from the salary's currency marker)",
+      "title": "Currency"
+    }
+  },
+  "required": [
+    "employer_name",
+    "employee_name",
+    "salary_monthly",
+    "start_date",
+    "notice_period_days",
+    "currency"
+  ],
+  "title": "EmploymentContractDocument",
+  "type": "object"
+}
